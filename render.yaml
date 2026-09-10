@@ -3,4 +3,4 @@ services:
     name: souleymane-kone-vcard
     env: static
     buildCommand: ""
-    publishDir: "."
+    staticPublishPath: "."
