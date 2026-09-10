@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Souleymane Kone | Carte de Visite Digitale</title>
+  <title>vcard — Générateur de Carte de Visite Digitale & QR Code</title>
   <!-- Google Fonts: Inter & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,139 +18,234 @@
   <div class="glow-bg glow-bg-1"></div>
   <div class="glow-bg glow-bg-2"></div>
 
-  <main class="card-wrapper">
-    <!-- Main Business Card Container -->
-    <article class="vcard-container">
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="app-brand">
+      <div class="logo-icon"><i class="fa-solid fa-address-card"></i></div>
+      <span class="app-name">vcard</span>
+      <span class="app-tagline">Générateur de Carte Virtuelle & QR Code</span>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="btn btn-secondary-sm" id="loadExampleBtn">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Exemple par défaut
+      </button>
+    </div>
+  </header>
 
-      <!-- Card Header Banner -->
-      <div class="card-banner">
-        <span class="badge"><i class="fa-solid fa-circle"></i> En ligne / Disponible</span>
+  <!-- App Main Layout: Form Editor + Live Preview -->
+  <div class="app-container">
+
+    <!-- Left Column: Generator Form -->
+    <section class="form-container">
+      <div class="form-header">
+        <h2><i class="fa-solid fa-sliders"></i> Personnaliser la carte</h2>
+        <p>Remplissez les informations pour générer instantanément la carte et le QR Code.</p>
       </div>
 
-      <!-- Avatar Section -->
-      <div class="avatar-wrapper">
-        <div class="avatar-ring">
-          <img src="https://ui-avatars.com/api/?name=Souleymane+Kone&background=4F46E5&color=fff&size=256&bold=true&font-family=Outfit" alt="Souleymane Kone Avatar" class="avatar-img" id="avatarImg">
-        </div>
-      </div>
-
-      <!-- Profile Header Information -->
-      <section class="profile-info">
-        <h1 class="profile-name">Souleymane Kone</h1>
-        <h2 class="profile-title">Développeur Web & Consultant</h2>
-        <div class="profile-company">
-          <i class="fa-solid fa-building"></i> <span>ZANGA</span>
-        </div>
-        <div class="profile-location">
-          <i class="fa-solid fa-location-dot"></i> <span>Bamako, Mali</span>
-        </div>
-      </section>
-
-      <!-- Quick Action Buttons -->
-      <section class="quick-actions">
-        <a href="tel:+22370000000" class="btn btn-action btn-call" title="Appeler">
-          <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
-          <span>Appeler</span>
-        </a>
-        <a href="mailto:contact@zanga.ml" class="btn btn-action btn-email" title="Envoyer un email">
-          <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
-          <span>Email</span>
-        </a>
-        <a href="https://wa.me/22370000000" target="_blank" rel="noopener noreferrer" class="btn btn-action btn-whatsapp" title="WhatsApp">
-          <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
-          <span>WhatsApp</span>
-        </a>
-        <a href="contact.vcf" download="Souleymane_Kone.vcf" class="btn btn-action btn-vcard" id="downloadVCardBtn" title="Enregistrer le contact">
-          <div class="icon-box"><i class="fa-solid fa-user-plus"></i></div>
-          <span>Enregistrer</span>
-        </a>
-      </section>
-
-      <!-- Divider -->
-      <hr class="divider">
-
-      <!-- About / Bio Section -->
-      <section class="bio-section">
-        <h3><i class="fa-solid fa-circle-info"></i> À propos</h3>
-        <p>Spécialiste du développement web moderne et de la stratégie digitale. Accompagnement des entreprises et startups dans leur transformation numérique à Bamako et à l'international.</p>
-      </section>
-
-      <!-- Contact Details List -->
-      <section class="contact-details">
-        <div class="detail-item">
-          <i class="fa-solid fa-phone detail-icon"></i>
-          <div class="detail-content">
-            <span class="detail-label">Téléphone</span>
-            <a href="tel:+22370000000" class="detail-value">+223 70 00 00 00</a>
+      <form id="vcardForm" onsubmit="return false;">
+        <!-- General Info -->
+        <fieldset class="form-section">
+          <legend><i class="fa-solid fa-user"></i> Informations Générales</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="inputFullName">Nom & Prénom *</label>
+              <input type="text" id="inputFullName" placeholder="Ex: Souleymane Kone" value="Souleymane Kone" required>
+            </div>
+            <div class="form-group">
+              <label for="inputJobTitle">Titre / Poste</label>
+              <input type="text" id="inputJobTitle" placeholder="Ex: Développeur Web & Consultant" value="Développeur Web & Consultant">
+            </div>
+            <div class="form-group">
+              <label for="inputCompany">Entreprise / Organisation</label>
+              <input type="text" id="inputCompany" placeholder="Ex: ZANGA" value="ZANGA">
+            </div>
+            <div class="form-group">
+              <label for="inputLocation">Ville / Pays</label>
+              <input type="text" id="inputLocation" placeholder="Ex: Bamako, Mali" value="Bamako, Mali">
+            </div>
+            <div class="form-group full-width">
+              <label for="inputAvatarUrl">Photo de Profil (URL de l'image)</label>
+              <input type="url" id="inputAvatarUrl" placeholder="Ex: https://exemple.com/photo.jpg (Laisser vide pour générer automatiquement)">
+            </div>
           </div>
-        </div>
-        <div class="detail-item">
-          <i class="fa-solid fa-envelope detail-icon"></i>
-          <div class="detail-content">
-            <span class="detail-label">Email professionnel</span>
-            <a href="mailto:contact@zanga.ml" class="detail-value">contact@zanga.ml</a>
-          </div>
-        </div>
-        <div class="detail-item">
-          <i class="fa-solid fa-globe detail-icon"></i>
-          <div class="detail-content">
-            <span class="detail-label">Site Web</span>
-            <a href="https://zanga.ml" target="_blank" rel="noopener noreferrer" class="detail-value">https://zanga.ml</a>
-          </div>
-        </div>
-      </section>
+        </fieldset>
 
-      <!-- Social Media Networks -->
-      <section class="social-links">
-        <h3><i class="fa-solid fa-share-nodes"></i> Réseaux sociaux</h3>
-        <div class="social-icons">
-          <a href="https://linkedin.com/in/souleymane-kone" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon linkedin">
-            <i class="fa-brands fa-linkedin-in"></i>
-          </a>
-          <a href="https://github.com/souleymane-kone" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon github">
-            <i class="fa-brands fa-github"></i>
-          </a>
-          <a href="https://wa.me/22370000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon whatsapp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-        </div>
-      </section>
+        <!-- Contact Information -->
+        <fieldset class="form-section">
+          <legend><i class="fa-solid fa-phone"></i> Coordonnées de Contact</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="inputPhone">Numéro de téléphone *</label>
+              <input type="tel" id="inputPhone" placeholder="Ex: +223 70 00 00 00" value="+223 70 00 00 00" required>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail">Adresse Email *</label>
+              <input type="email" id="inputEmail" placeholder="Ex: contact@zanga.ml" value="contact@zanga.ml" required>
+            </div>
+            <div class="form-group full-width">
+              <label for="inputBio">À propos / Bio</label>
+              <textarea id="inputBio" rows="3" placeholder="Présentation synthétique...">Spécialiste du développement web moderne et de la stratégie digitale. Accompagnement des entreprises et startups dans leur transformation numérique à Bamako et à l'international.</textarea>
+            </div>
+          </div>
+        </fieldset>
 
-      <!-- Interactive QR Code Trigger Section -->
-      <section class="qr-preview-section">
-        <button id="openQrModalBtn" class="btn btn-qr-trigger">
-          <i class="fa-solid fa-qrcode"></i>
-          <span>Afficher le QR Code</span>
+        <!-- Websites Section -->
+        <fieldset class="form-section">
+          <legend><i class="fa-solid fa-globe"></i> Sites Web</legend>
+          <div id="websitesContainer">
+            <!-- Dynamic Website Rows -->
+          </div>
+          <button type="button" class="btn btn-outline-sm" id="addWebsiteBtn">
+            <i class="fa-solid fa-plus"></i> Ajouter un site web
+          </button>
+        </fieldset>
+
+        <!-- Social Networks Section -->
+        <fieldset class="form-section">
+          <legend><i class="fa-solid fa-share-nodes"></i> Réseaux Sociaux</legend>
+          <div id="socialsContainer">
+            <!-- Dynamic Social Rows -->
+          </div>
+          <button type="button" class="btn btn-outline-sm" id="addSocialBtn">
+            <i class="fa-solid fa-plus"></i> Ajouter un réseau social
+          </button>
+        </fieldset>
+      </form>
+    </section>
+
+    <!-- Right Column: Live Interactive Business Card Preview -->
+    <section class="preview-container">
+      <div class="preview-header">
+        <span><i class="fa-solid fa-eye"></i> Aperçu en direct</span>
+        <button id="previewQrBtn" class="btn btn-gold-sm">
+          <i class="fa-solid fa-qrcode"></i> Scanner / QR Code
         </button>
-      </section>
+      </div>
 
-      <!-- Footer -->
-      <footer class="card-footer">
-        <p>© 2025 ZANGA — Powered by Interactive vCard System</p>
-      </footer>
-    </article>
-  </main>
+      <main class="card-wrapper">
+        <!-- Main Business Card Container -->
+        <article class="vcard-container" id="vcardPreview">
+
+          <!-- Card Header Banner -->
+          <div class="card-banner">
+            <span class="badge"><i class="fa-solid fa-circle"></i> En ligne / Disponible</span>
+          </div>
+
+          <!-- Avatar Section -->
+          <div class="avatar-wrapper">
+            <div class="avatar-ring">
+              <img src="https://ui-avatars.com/api/?name=Souleymane+Kone&background=4F46E5&color=fff&size=256&bold=true&font-family=Outfit" alt="Avatar" class="avatar-img" id="previewAvatar">
+            </div>
+          </div>
+
+          <!-- Profile Header Information -->
+          <section class="profile-info">
+            <h1 class="profile-name" id="previewName">Souleymane Kone</h1>
+            <h2 class="profile-title" id="previewTitle">Développeur Web & Consultant</h2>
+            <div class="profile-company" id="previewCompanyBox">
+              <i class="fa-solid fa-building"></i> <span id="previewCompany">ZANGA</span>
+            </div>
+            <div class="profile-location" id="previewLocationBox">
+              <i class="fa-solid fa-location-dot"></i> <span id="previewLocation">Bamako, Mali</span>
+            </div>
+          </section>
+
+          <!-- Quick Action Buttons -->
+          <section class="quick-actions">
+            <a href="tel:+22370000000" class="btn btn-action btn-call" id="previewCallBtn" title="Appeler">
+              <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+              <span>Appeler</span>
+            </a>
+            <a href="mailto:contact@zanga.ml" class="btn btn-action btn-email" id="previewEmailBtn" title="Envoyer un email">
+              <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+              <span>Email</span>
+            </a>
+            <a href="https://wa.me/22370000000" target="_blank" rel="noopener noreferrer" class="btn btn-action btn-whatsapp" id="previewWhatsappBtn" title="WhatsApp">
+              <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+              <span>WhatsApp</span>
+            </a>
+            <button type="button" class="btn btn-action btn-vcard" id="downloadVCardBtn" title="Enregistrer le contact">
+              <div class="icon-box"><i class="fa-solid fa-user-plus"></i></div>
+              <span>Enregistrer</span>
+            </button>
+          </section>
+
+          <!-- Divider -->
+          <hr class="divider">
+
+          <!-- About / Bio Section -->
+          <section class="bio-section" id="previewBioBox">
+            <h3><i class="fa-solid fa-circle-info"></i> À propos</h3>
+            <p id="previewBio">Spécialiste du développement web moderne et de la stratégie digitale.</p>
+          </section>
+
+          <!-- Contact Details List -->
+          <section class="contact-details">
+            <div class="detail-item" id="previewPhoneBox">
+              <i class="fa-solid fa-phone detail-icon"></i>
+              <div class="detail-content">
+                <span class="detail-label">Téléphone</span>
+                <a href="tel:+22370000000" class="detail-value" id="previewPhone">+223 70 00 00 00</a>
+              </div>
+            </div>
+            <div class="detail-item" id="previewEmailBox">
+              <i class="fa-solid fa-envelope detail-icon"></i>
+              <div class="detail-content">
+                <span class="detail-label">Email professionnel</span>
+                <a href="mailto:contact@zanga.ml" class="detail-value" id="previewEmail">contact@zanga.ml</a>
+              </div>
+            </div>
+            <div id="previewWebsitesList">
+              <!-- Dynamic Websites rendering -->
+            </div>
+          </section>
+
+          <!-- Social Media Networks -->
+          <section class="social-links" id="previewSocialsBox">
+            <h3><i class="fa-solid fa-share-nodes"></i> Réseaux sociaux</h3>
+            <div class="social-icons" id="previewSocialIcons">
+              <!-- Dynamic Social Icons rendering -->
+            </div>
+          </section>
+
+          <!-- Interactive QR Code Trigger Section -->
+          <section class="qr-preview-section">
+            <button type="button" id="openQrModalBtn" class="btn btn-qr-trigger">
+              <i class="fa-solid fa-qrcode"></i>
+              <span>Afficher le QR Code</span>
+            </button>
+          </section>
+
+          <!-- Footer -->
+          <footer class="card-footer">
+            <p>© <span id="currentYear">2025</span> vcard — Carte de visite virtuelle interactive</p>
+          </footer>
+        </article>
+      </main>
+    </section>
+
+  </div>
 
   <!-- QR Code Fullscreen / Large Modal Popup -->
   <div class="modal-backdrop" id="qrModal" aria-hidden="true">
     <div class="modal-card">
-      <button class="modal-close-btn" id="closeQrModalBtn" aria-label="Fermer">
+      <button type="button" class="modal-close-btn" id="closeQrModalBtn" aria-label="Fermer">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
       <div class="modal-header">
         <div class="modal-icon"><i class="fa-solid fa-qrcode"></i></div>
-        <h3>Flash QR Code</h3>
-        <p>Scannez pour ajouter <strong>Souleymane Kone</strong> directement dans vos contacts</p>
+        <h3>Flash QR Code vCard</h3>
+        <p>Scannez ce QR Code avec un smartphone pour enregistrer directement <strong id="modalName">Souleymane Kone</strong> dans vos contacts.</p>
       </div>
 
       <!-- Container where QRCode.js will render the code -->
       <div class="qr-code-box" id="qrcodeContainer"></div>
 
       <div class="modal-actions">
-        <a href="contact.vcf" download="Souleymane_Kone.vcf" class="btn btn-primary-gold">
+        <button type="button" class="btn btn-primary-gold" id="modalDownloadVCardBtn">
           <i class="fa-solid fa-download"></i> Télécharger vCard (.vcf)
-        </a>
+        </button>
       </div>
     </div>
   </div>
