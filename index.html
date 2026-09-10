@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Souleymane Kone | Carte de Visite Digitale</title>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="glow-bg glow-bg-1"></div>
+  <div class="glow-bg glow-bg-2"></div>
+
+  <main class="card-wrapper">
+    <!-- Main Business Card Container -->
+    <article class="vcard-container">
+
+      <!-- Card Header Banner -->
+      <div class="card-banner">
+        <span class="badge"><i class="fa-solid fa-circle"></i> En ligne / Disponible</span>
+      </div>
+
+      <!-- Avatar Section -->
+      <div class="avatar-wrapper">
+        <div class="avatar-ring">
+          <img src="https://ui-avatars.com/api/?name=Souleymane+Kone&background=4F46E5&color=fff&size=256&bold=true&font-family=Outfit" alt="Souleymane Kone Avatar" class="avatar-img" id="avatarImg">
+        </div>
+      </div>
+
+      <!-- Profile Header Information -->
+      <section class="profile-info">
+        <h1 class="profile-name">Souleymane Kone</h1>
+        <h2 class="profile-title">Développeur Web & Consultant</h2>
+        <div class="profile-company">
+          <i class="fa-solid fa-building"></i> <span>ZANGA</span>
+        </div>
+        <div class="profile-location">
+          <i class="fa-solid fa-location-dot"></i> <span>Bamako, Mali</span>
+        </div>
+      </section>
+
+      <!-- Quick Action Buttons -->
+      <section class="quick-actions">
+        <a href="tel:+22370000000" class="btn btn-action btn-call" title="Appeler">
+          <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+          <span>Appeler</span>
+        </a>
+        <a href="mailto:contact@zanga.ml" class="btn btn-action btn-email" title="Envoyer un email">
+          <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+          <span>Email</span>
+        </a>
+        <a href="https://wa.me/22370000000" target="_blank" rel="noopener noreferrer" class="btn btn-action btn-whatsapp" title="WhatsApp">
+          <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+          <span>WhatsApp</span>
+        </a>
+        <a href="contact.vcf" download="Souleymane_Kone.vcf" class="btn btn-action btn-vcard" id="downloadVCardBtn" title="Enregistrer le contact">
+          <div class="icon-box"><i class="fa-solid fa-user-plus"></i></div>
+          <span>Enregistrer</span>
+        </a>
+      </section>
+
+      <!-- Divider -->
+      <hr class="divider">
+
+      <!-- About / Bio Section -->
+      <section class="bio-section">
+        <h3><i class="fa-solid fa-circle-info"></i> À propos</h3>
+        <p>Spécialiste du développement web moderne et de la stratégie digitale. Accompagnement des entreprises et startups dans leur transformation numérique à Bamako et à l'international.</p>
+      </section>
+
+      <!-- Contact Details List -->
+      <section class="contact-details">
+        <div class="detail-item">
+          <i class="fa-solid fa-phone detail-icon"></i>
+          <div class="detail-content">
+            <span class="detail-label">Téléphone</span>
+            <a href="tel:+22370000000" class="detail-value">+223 70 00 00 00</a>
+          </div>
+        </div>
+        <div class="detail-item">
+          <i class="fa-solid fa-envelope detail-icon"></i>
+          <div class="detail-content">
+            <span class="detail-label">Email professionnel</span>
+            <a href="mailto:contact@zanga.ml" class="detail-value">contact@zanga.ml</a>
+          </div>
+        </div>
+        <div class="detail-item">
+          <i class="fa-solid fa-globe detail-icon"></i>
+          <div class="detail-content">
+            <span class="detail-label">Site Web</span>
+            <a href="https://zanga.ml" target="_blank" rel="noopener noreferrer" class="detail-value">https://zanga.ml</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Social Media Networks -->
+      <section class="social-links">
+        <h3><i class="fa-solid fa-share-nodes"></i> Réseaux sociaux</h3>
+        <div class="social-icons">
+          <a href="https://linkedin.com/in/souleymane-kone" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon linkedin">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/souleymane-kone" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon github">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://wa.me/22370000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- Interactive QR Code Trigger Section -->
+      <section class="qr-preview-section">
+        <button id="openQrModalBtn" class="btn btn-qr-trigger">
+          <i class="fa-solid fa-qrcode"></i>
+          <span>Afficher le QR Code</span>
+        </button>
+      </section>
+
+      <!-- Footer -->
+      <footer class="card-footer">
+        <p>© 2025 ZANGA — Powered by Interactive vCard System</p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- QR Code Fullscreen / Large Modal Popup -->
+  <div class="modal-backdrop" id="qrModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="closeQrModalBtn" aria-label="Fermer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-icon"><i class="fa-solid fa-qrcode"></i></div>
+        <h3>Flash QR Code</h3>
+        <p>Scannez pour ajouter <strong>Souleymane Kone</strong> directement dans vos contacts</p>
+      </div>
+
+      <!-- Container where QRCode.js will render the code -->
+      <div class="qr-code-box" id="qrcodeContainer"></div>
+
+      <div class="modal-actions">
+        <a href="contact.vcf" download="Souleymane_Kone.vcf" class="btn btn-primary-gold">
+          <i class="fa-solid fa-download"></i> Télécharger vCard (.vcf)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Code JS Library -->
+  <script src="qrcode.min.js"></script>
+  <!-- Main Interactive Script -->
+  <script src="script.js"></script>
+</body>
+</html>

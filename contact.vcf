@@ -1,0 +1,16 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Kone;Souleymane;;;
+FN:Souleymane Kone
+ORG:ZANGA
+TITLE:Développeur Web & Consultant
+TEL;TYPE=CELL,VOICE:+22370000000
+EMAIL;TYPE=INTERNET,PREF:contact@zanga.ml
+URL:https://zanga.ml
+ADR;TYPE=WORK,POSTAL,PARCEL:;;Bamako;Bamako;;;Mali
+LABEL;TYPE=WORK,POSTAL,PARCEL:Bamako\, Mali
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/souleymane-kone
+X-SOCIALPROFILE;TYPE=github:https://github.com/souleymane-kone
+X-SOCIALPROFILE;TYPE=whatsapp:https://wa.me/22370000000
+NOTE:Développeur Web & Consultant chez ZANGA. Expert en solutions web modernes et stratégie digitale.
+END:VCARD
