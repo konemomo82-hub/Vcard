@@ -26,8 +26,11 @@
       <span class="app-tagline">Générateur de Carte Virtuelle & QR Code</span>
     </div>
     <div class="header-actions">
+      <button type="button" class="btn btn-primary-sm" id="addNewCardBtnHeader">
+        <i class="fa-solid fa-plus-circle"></i> Ajouter une carte
+      </button>
       <button type="button" class="btn btn-secondary-sm" id="loadExampleBtn">
-        <i class="fa-solid fa-wand-magic-sparkles"></i> Exemple par défaut
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Exemple
       </button>
     </div>
   </header>
@@ -38,8 +41,13 @@
     <!-- Left Column: Generator Form -->
     <section class="form-container">
       <div class="form-header">
-        <h2><i class="fa-solid fa-sliders"></i> Personnaliser la carte</h2>
-        <p>Remplissez les informations pour générer instantanément la carte et le QR Code.</p>
+        <div class="form-header-title">
+          <h2><i class="fa-solid fa-sliders"></i> Personnaliser la carte</h2>
+          <button type="button" class="btn btn-primary-sm" id="addNewCardBtnForm" title="Créer une nouvelle carte de zéro">
+            <i class="fa-solid fa-plus-circle"></i> Ajouter une carte
+          </button>
+        </div>
+        <p>Remplissez les informations ci-dessous pour créer instantanément une carte de visite avec son QR Code scannable et téléchargeable.</p>
       </div>
 
       <form id="vcardForm" onsubmit="return false;">
@@ -65,7 +73,7 @@
             </div>
             <div class="form-group full-width">
               <label for="inputAvatarUrl">Photo de Profil (URL de l'image)</label>
-              <input type="url" id="inputAvatarUrl" placeholder="Ex: https://exemple.com/photo.jpg (Laisser vide pour générer automatiquement)">
+              <input type="url" id="inputAvatarUrl" placeholder="Ex: https://exemple.com/photo.jpg (Laisser vide pour générer un avatar avec vos initiales)">
             </div>
           </div>
         </fieldset>
@@ -212,7 +220,7 @@
           <section class="qr-preview-section">
             <button type="button" id="openQrModalBtn" class="btn btn-qr-trigger">
               <i class="fa-solid fa-qrcode"></i>
-              <span>Afficher le QR Code</span>
+              <span>Afficher & Télécharger le QR Code</span>
             </button>
           </section>
 
@@ -236,15 +244,18 @@
       <div class="modal-header">
         <div class="modal-icon"><i class="fa-solid fa-qrcode"></i></div>
         <h3>Flash QR Code vCard</h3>
-        <p>Scannez ce QR Code avec un smartphone pour enregistrer directement <strong id="modalName">Souleymane Kone</strong> dans vos contacts.</p>
+        <p>Scannez ce QR Code avec un smartphone ou téléchargez-le pour votre carte de visite physique.</p>
       </div>
 
       <!-- Container where QRCode.js will render the code -->
       <div class="qr-code-box" id="qrcodeContainer"></div>
 
-      <div class="modal-actions">
-        <button type="button" class="btn btn-primary-gold" id="modalDownloadVCardBtn">
-          <i class="fa-solid fa-download"></i> Télécharger vCard (.vcf)
+      <div class="modal-actions-grid">
+        <button type="button" class="btn btn-primary-gold" id="downloadQrImageBtn">
+          <i class="fa-solid fa-file-image"></i> Télécharger le QR Code (PNG)
+        </button>
+        <button type="button" class="btn btn-primary-indigo" id="modalDownloadVCardBtn">
+          <i class="fa-solid fa-address-card"></i> Télécharger la carte (.vcf)
         </button>
       </div>
     </div>

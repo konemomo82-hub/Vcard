@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const addSocialBtn = document.getElementById('addSocialBtn');
   const loadExampleBtn = document.getElementById('loadExampleBtn');
 
+  const addNewCardBtnHeader = document.getElementById('addNewCardBtnHeader');
+  const addNewCardBtnForm = document.getElementById('addNewCardBtnForm');
+
   // Elements - Preview Card
   const previewAvatar = document.getElementById('previewAvatar');
   const previewName = document.getElementById('previewName');
@@ -46,20 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const downloadVCardBtn = document.getElementById('downloadVCardBtn');
   const modalDownloadVCardBtn = document.getElementById('modalDownloadVCardBtn');
+  const downloadQrImageBtn = document.getElementById('downloadQrImageBtn');
   const openQrModalBtn = document.getElementById('openQrModalBtn');
   const previewQrBtn = document.getElementById('previewQrBtn');
   const closeQrModalBtn = document.getElementById('closeQrModalBtn');
   const qrModal = document.getElementById('qrModal');
   const qrcodeContainer = document.getElementById('qrcodeContainer');
-  const modalName = document.getElementById('modalName');
 
-  // Current Year
-  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  // Set Current Year
+  if (document.getElementById('currentYear')) {
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  }
 
   // QR Code instance
   let qrcodeInstance = null;
 
-  // Initial State: Sample Data
+  // Initial State: Default Sample Data
   const defaultWebsites = [
     { label: 'Site Web', url: 'https://zanga.ml' }
   ];
@@ -70,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { platform: 'whatsapp', url: 'https://wa.me/22370000000' }
   ];
 
-  // Initialize Dynamic Form Rows
+  // Initialize Default Form Rows
   function initDefaultRows() {
     websitesContainer.innerHTML = '';
     socialsContainer.innerHTML = '';
@@ -84,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const row = document.createElement('div');
     row.className = 'dynamic-row website-row';
     row.innerHTML = `
-      <input type="text" class="website-label" placeholder="Nom du site (ex: Portfolio)" value="${escapeHtml(label)}">
+      <input type="text" class="website-label" placeholder="Nom (ex: Portfolio)" value="${escapeHtml(label)}">
       <input type="url" class="website-url" placeholder="https://..." value="${escapeHtml(url)}">
       <button type="button" class="btn-remove-row" title="Supprimer"><i class="fa-solid fa-trash"></i></button>
     `;
@@ -182,9 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return { name, title, company, location, avatarUrl, phone, email, bio, websites, socials };
   }
 
-  // Generate VCF vCard String
+  // Generate VCF vCard Standard String
   function generateVCFString(data) {
-    const nameParts = data.name.split(' ');
+    const nameParts = data.name.trim().split(/\s+/);
     const lastName = nameParts.length > 1 ? nameParts.pop() : '';
     const firstName = nameParts.join(' ');
 
@@ -218,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return vcf.join('\r\n');
   }
 
-  // Live Update Preview
+  // Live Update Preview Card
   function updatePreview() {
     const data = getVCardData();
 
@@ -331,9 +336,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       previewSocialsBox.style.display = 'none';
     }
-
-    // Update Modal Name
-    modalName.textContent = data.name;
   }
 
   // Handle Download vCard (.vcf)
@@ -343,16 +345,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const blob = new Blob([vcfString], { type: 'text/vcard;charset=utf-8' });
     const url = URL.createObjectURL(blob);
 
+    const filename = `${data.name.replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '_')}_contact.vcf`;
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${data.name.replace(/\s+/g, '_')}_contact.vcf`;
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
 
-  // Render QR Code Modal
+  // Render QR Code in Modal
   function renderQRCode() {
     const data = getVCardData();
     const vcfString = generateVCFString(data);
@@ -360,12 +363,63 @@ document.addEventListener('DOMContentLoaded', () => {
     qrcodeContainer.innerHTML = '';
     qrcodeInstance = new QRCode(qrcodeContainer, {
       text: vcfString,
-      width: 220,
-      height: 220,
+      width: 240,
+      height: 240,
       colorDark: '#0B0F19',
       colorLight: '#FFFFFF',
       correctLevel: QRCode.CorrectLevel.M
     });
+  }
+
+  // Download QR Code as PNG Image
+  function downloadQRCodeImage() {
+    const data = getVCardData();
+    const filename = `QRCode_${data.name.replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '_')}.png`;
+
+    // Try canvas first
+    const canvas = qrcodeContainer.querySelector('canvas');
+    if (canvas) {
+      const dataUrl = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return;
+    }
+
+    // Try img tag next
+    const img = qrcodeContainer.querySelector('img');
+    if (img && img.src) {
+      const a = document.createElement('a');
+      a.href = img.src;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  }
+
+  // Reset Form to Create a New Card ("Ajouter une carte")
+  function resetFormForNewCard() {
+    inputFullName.value = '';
+    inputJobTitle.value = '';
+    inputCompany.value = '';
+    inputLocation.value = '';
+    inputAvatarUrl.value = '';
+    inputPhone.value = '';
+    inputEmail.value = '';
+    inputBio.value = '';
+
+    websitesContainer.innerHTML = '';
+    socialsContainer.innerHTML = '';
+
+    addWebsiteRow('', '');
+    addSocialRow('linkedin', '');
+
+    inputFullName.focus();
+    updatePreview();
   }
 
   // Modal Controls
@@ -382,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  // Event Listeners for Form Inputs
+  // Event Listeners for Input Change
   [inputFullName, inputJobTitle, inputCompany, inputLocation, inputAvatarUrl, inputPhone, inputEmail, inputBio].forEach(input => {
     input.addEventListener('input', updatePreview);
   });
@@ -400,6 +454,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Action Buttons
   downloadVCardBtn.addEventListener('click', triggerVCardDownload);
   modalDownloadVCardBtn.addEventListener('click', triggerVCardDownload);
+  downloadQrImageBtn.addEventListener('click', downloadQRCodeImage);
+
+  addNewCardBtnHeader.addEventListener('click', resetFormForNewCard);
+  addNewCardBtnForm.addEventListener('click', resetFormForNewCard);
 
   openQrModalBtn.addEventListener('click', openModal);
   previewQrBtn.addEventListener('click', openModal);
